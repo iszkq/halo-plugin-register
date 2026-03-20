@@ -6,12 +6,12 @@ spec:
   enabled: true
   requires: ">=2.22.0"
   author:
-    name: OpenAI Codex
-    website: https://openai.com
+    name: 恪勤
+    website: https://github.com/iszkq/halo-plugin-register
   logo: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23ffffff'/%3E%3Crect x='8' y='14' width='48' height='36' rx='10' fill='%23eff6ff' stroke='%232563eb' stroke-width='2.5'/%3E%3Cpath d='M24 14v36' stroke='%232563eb' stroke-width='2.5' stroke-linecap='round'/%3E%3Cpath d='M32 28h14' stroke='%230f172a' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M32 36h10' stroke='%230f172a' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='17' cy='24' r='2.3' fill='%232563eb'/%3E%3Ccircle cx='17' cy='40' r='2.3' fill='%232563eb'/%3E%3C/svg%3E"
-  homepage: https://github.com/example/halo-plugin-register
-  repo: https://github.com/example/halo-plugin-register
-  issues: https://github.com/example/halo-plugin-register/issues
+  homepage: https://github.com/iszkq/halo-plugin-register
+  repo: https://github.com/iszkq/halo-plugin-register
+  issues: https://github.com/iszkq/halo-plugin-register/issues
   displayName: "邀请码注册"
   description: "让 Halo 站点注册前先校验邀请码，并提供邀请码管理页面。"
   settingName: invite-register-settings
