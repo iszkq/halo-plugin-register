@@ -1,0 +1,29 @@
+plugins {
+    id 'base'
+    id "com.github.node-gradle.node" version "7.1.0"
+}
+
+group = 'com.example.halo.ui'
+
+node {
+    version = '22.14.0'
+    pnpmVersion = '9.15.3'
+    download = true
+}
+
+tasks.register('buildFrontend', com.github.gradle.node.pnpm.task.PnpmTask) {
+    group = 'build'
+    description = 'Builds the plugin UI using pnpm.'
+    args = ['build']
+    dependsOn tasks.named('pnpmInstall')
+    inputs.dir(layout.projectDirectory.dir('src'))
+    inputs.files(fileTree(
+        dir: layout.projectDirectory,
+        includes: ['*.ts', '*.js', '*.json', '*.yaml', '*.d.ts', '*.vue']
+    ))
+    outputs.dir(layout.buildDirectory.dir('dist'))
+}
+
+tasks.named('assemble') {
+    dependsOn tasks.named('buildFrontend')
+}

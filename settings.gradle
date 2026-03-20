@@ -1,0 +1,3 @@
+rootProject.name = 'halo-plugin-register'
+
+include('ui')

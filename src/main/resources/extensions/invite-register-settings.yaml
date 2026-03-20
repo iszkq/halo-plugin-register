@@ -1,0 +1,71 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: invite-register-settings
+spec:
+  forms:
+    - group: general
+      label: 基础设置
+      formSchema:
+        - $formkit: checkbox
+          name: enabled
+          id: enabled
+          key: enabled
+          label: 启用邀请码注册
+          value: true
+        - $formkit: text
+          name: inviteFieldName
+          id: inviteFieldName
+          key: inviteFieldName
+          label: 邀请码字段名
+          value: inviteCode
+          validation: required|length:1,64
+        - $formkit: text
+          name: inputLabel
+          id: inputLabel
+          key: inputLabel
+          label: 邀请码标题
+          value: 邀请码
+        - $formkit: text
+          name: inputPlaceholder
+          id: inputPlaceholder
+          key: inputPlaceholder
+          label: 邀请码占位提示
+          value: 请输入邀请码
+        - $formkit: textarea
+          name: inputHelpText
+          id: inputHelpText
+          key: inputHelpText
+          label: 邀请码说明
+          value: 注册前请先向站长申请邀请码。
+          rows: 2
+        - $formkit: textarea
+          name: invalidMessage
+          id: invalidMessage
+          key: invalidMessage
+          label: 无效邀请码提示
+          value: 邀请码无效、已过期或已被用尽。
+          rows: 2
+        - $formkit: textarea
+          name: registrationPagePatterns
+          id: registrationPagePatterns
+          key: registrationPagePatterns
+          label: 注册页面路径
+          help: 一行一个，支持 Ant 风格路径，例如 /register、/uc/register、/signup
+          value: |-
+            /register
+            /uc/register
+            /signup
+          rows: 4
+        - $formkit: textarea
+          name: registrationApiPatterns
+          id: registrationApiPatterns
+          key: registrationApiPatterns
+          label: 注册提交路径
+          help: 一行一个，插件会拦截这些 POST 请求并校验邀请码。
+          value: |-
+            /signup
+            /apis/uc.api.registration.halo.run/v1alpha1/register
+            /apis/uc.api.halo.run/v1alpha1/register
+            /apis/api.uc.halo.run/v1alpha1/register
+          rows: 5

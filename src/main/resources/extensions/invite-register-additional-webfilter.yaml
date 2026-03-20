@@ -1,0 +1,9 @@
+apiVersion: plugin.halo.run/v1alpha1
+kind: ExtensionDefinition
+metadata:
+  name: invite-register-additional-webfilter
+spec:
+  className: run.halo.inviteregister.filter.InviteRegistrationFilter
+  extensionPointName: additional-webfilter
+  displayName: "邀请码注册过滤器"
+  description: "拦截注册请求并校验邀请码。"
