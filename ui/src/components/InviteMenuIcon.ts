@@ -6,21 +6,30 @@ export default defineComponent({
     return h(
       "svg",
       {
+        width: "18",
+        height: "18",
         viewBox: "0 0 24 24",
         fill: "none",
         stroke: "currentColor",
-        "stroke-width": "1.8",
+        "stroke-width": "2.2",
         "stroke-linecap": "round",
         "stroke-linejoin": "round",
         "aria-hidden": "true",
+        style: {
+          display: "block",
+          width: "18px",
+          height: "18px",
+          flexShrink: "0",
+          overflow: "visible",
+        },
       },
       [
         h("path", {
-          d: "M4.75 8.25A2.25 2.25 0 0 1 7 6h10a2.25 2.25 0 0 1 2.25 2.25v1.15a2.1 2.1 0 0 0 0 4.2v1.15A2.25 2.25 0 0 1 17 17H7a2.25 2.25 0 0 1-2.25-2.25V13.6a2.1 2.1 0 0 0 0-4.2Z",
+          d: "M5 7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5v1.2a2.2 2.2 0 0 0 0 4.6v1.2a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 14.5v-1.2a2.2 2.2 0 0 0 0-4.6Z",
         }),
-        h("path", { d: "M9 6v11" }),
-        h("path", { d: "M12.5 10h3.5" }),
-        h("path", { d: "M12.5 13.5h2.25" }),
+        h("path", { d: "M9.5 5v14" }),
+        h("path", { d: "M12.5 10.25h3.25" }),
+        h("path", { d: "M12.5 13.75h2.25" }),
       ],
     );
   },
