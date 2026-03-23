@@ -1,0 +1,22 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle' # 或者是 maven
+
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          # 核心：告诉 GitHub 把 build 出来的 jar 上传上来
+          files: build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
