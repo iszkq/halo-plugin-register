@@ -25,10 +25,6 @@ public class InviteRegistrationSettings {
 
     private Boolean enabled = true;
 
-    private String brandLogoText = "H";
-
-    private String brandName = "Halo";
-
     private String inviteFieldName = "inviteCode";
 
     private String inputLabel = "邀请码";
@@ -38,6 +34,16 @@ public class InviteRegistrationSettings {
     private String inputHelpText = "注册前请先向站长申请邀请码。";
 
     private String invalidMessage = "邀请码无效、已过期或已被用尽。";
+
+    private String brandSource = "site";
+
+    private String brandName = "";
+
+    private String brandLogo = "";
+
+    private String contactInfo = "";
+
+    private String contactImage = "";
 
     private String registrationPagePatterns = "/register\n/uc/register\n/signup";
 
@@ -77,18 +83,31 @@ public class InviteRegistrationSettings {
         return invalidMessage.trim();
     }
 
-    public String getBrandLogoTextSafely() {
-        if (brandLogoText == null || brandLogoText.isBlank()) {
-            return "H";
+    public String getBrandSourceSafely() {
+        if ("custom".equalsIgnoreCase(trimToNull(brandSource))) {
+            return "custom";
         }
-        return brandLogoText.trim();
+        return "site";
     }
 
     public String getBrandNameSafely() {
-        if (brandName == null || brandName.isBlank()) {
-            return "Halo";
-        }
-        return brandName.trim();
+        return trimToNull(brandName);
+    }
+
+    public String getBrandLogoSafely() {
+        return trimToNull(brandLogo);
+    }
+
+    public String getContactInfoSafely() {
+        return trimToNull(contactInfo);
+    }
+
+    public String getContactImageSafely() {
+        return trimToNull(contactImage);
+    }
+
+    public boolean hasContactConfig() {
+        return getContactInfoSafely() != null || getContactImageSafely() != null;
     }
 
     private List<String> splitLines(String value) {
@@ -107,5 +126,12 @@ public class InviteRegistrationSettings {
         LinkedHashSet<String> patterns = new LinkedHashSet<>(defaults);
         patterns.addAll(splitLines(value));
         return List.copyOf(patterns);
+    }
+
+    private String trimToNull(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return value.trim();
     }
 }
