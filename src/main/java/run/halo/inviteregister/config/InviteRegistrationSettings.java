@@ -25,6 +25,10 @@ public class InviteRegistrationSettings {
 
     private Boolean enabled = true;
 
+    private String brandLogoText = "H";
+
+    private String brandName = "Halo";
+
     private String inviteFieldName = "inviteCode";
 
     private String inputLabel = "邀请码";
@@ -71,6 +75,20 @@ public class InviteRegistrationSettings {
             return "邀请码无效、已过期或已被用尽。";
         }
         return invalidMessage.trim();
+    }
+
+    public String getBrandLogoTextSafely() {
+        if (brandLogoText == null || brandLogoText.isBlank()) {
+            return "H";
+        }
+        return brandLogoText.trim();
+    }
+
+    public String getBrandNameSafely() {
+        if (brandName == null || brandName.isBlank()) {
+            return "Halo";
+        }
+        return brandName.trim();
     }
 
     private List<String> splitLines(String value) {

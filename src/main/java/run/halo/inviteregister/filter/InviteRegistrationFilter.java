@@ -243,6 +243,10 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
         CsrfToken csrfToken) {
         String title = "邀请码注册";
         String description = "请输入有效的邀请码，验证通过后继续完成注册。";
+        
+        String brandLogoText = escapeHtml(settings.getBrandLogoTextSafely());
+        String brandName = escapeHtml(settings.getBrandNameSafely());
+        
         String label = escapeHtml(defaultIfBlank(settings.getInputLabel(), "邀请码"));
         String placeholder = escapeHtml(defaultIfBlank(settings.getInputPlaceholder(), "请输入邀请码"));
         String helpText = escapeHtml(defaultIfBlank(settings.getInputHelpText(), ""));
@@ -296,8 +300,8 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
             <body>
                 <section class="invite-card">
                     <div class="invite-brand">
-                        <div class="invite-brand__mark">H</div>
-                        <span class="invite-brand__text">Halo</span>
+                        <div class="invite-brand__mark">%s</div>
+                        <span class="invite-brand__text">%s</span>
                     </div>
                     <h1>%s</h1>
                     <p class="invite-desc">%s</p>
@@ -346,6 +350,8 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
             </html>
             """.formatted(
             title,
+            brandLogoText,
+            brandName,
             title,
             description,
             errorBlock,

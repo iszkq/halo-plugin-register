@@ -13,6 +13,22 @@ spec:
           key: enabled
           label: 启用邀请码注册
           value: true
+          
+        - $formkit: text
+          name: brandLogoText
+          id: brandLogoText
+          key: brandLogoText
+          label: 验证页 Logo 文字
+          help: 验证页面上方正方形内的单字，默认为 H
+          value: H
+        - $formkit: text
+          name: brandName
+          id: brandName
+          key: brandName
+          label: 验证页品牌名称
+          help: 验证页面上方显示的品牌名称，默认为 Halo
+          value: Halo
+          
         - $formkit: text
           name: inviteFieldName
           id: inviteFieldName
