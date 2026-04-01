@@ -13,6 +13,7 @@ jobs:
     with:
       pnpm-version: 9
       node-version: 22
+      ui-path: ui
       java-version: 21
       app-id: app-9lsqrhp
       skip-appstore-release: false
