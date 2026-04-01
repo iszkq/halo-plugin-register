@@ -17,5 +17,5 @@ jobs:
       ui-path: ui
       skip-node-setup: true
       java-version: 21
-      app-id: app-9lsqrhp
+      app-id: app-9lsqrhpl
       skip-appstore-release: false
