@@ -44,5 +44,5 @@ jobs:
       - name: Upload jar artifact
         uses: actions/upload-artifact@v4
         with:
-          name: plugin-bible-jar
+          name: halo-plugin-register
           path: build/libs/*.jar
