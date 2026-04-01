@@ -13,22 +13,6 @@ spec:
           key: enabled
           label: 启用邀请码注册
           value: true
-          
-        - $formkit: text
-          name: brandLogoText
-          id: brandLogoText
-          key: brandLogoText
-          label: 验证页 Logo 文字
-          help: 验证页面上方正方形内的单字，默认为 H
-          value: H
-        - $formkit: text
-          name: brandName
-          id: brandName
-          key: brandName
-          label: 验证页品牌名称
-          help: 验证页面上方显示的品牌名称，默认为 Halo
-          value: Halo
-          
         - $formkit: text
           name: inviteFieldName
           id: inviteFieldName
@@ -62,6 +46,53 @@ spec:
           label: 无效邀请码提示
           value: 邀请码无效、已过期或已被用尽。
           rows: 2
+        - $formkit: radio
+          name: brandSource
+          id: brandSource
+          key: brandSource
+          label: 页面品牌来源
+          help: 跟随站点设置时会优先读取站点标题和图标，读取不到则回退为默认 Halo；使用自定义品牌时按下方配置渲染。
+          value: site
+          options:
+            - label: 跟随站点设置
+              value: site
+            - label: 使用自定义品牌
+              value: custom
+        - $formkit: text
+          name: brandName
+          id: brandName
+          key: brandName
+          label: 自定义品牌名称
+          help: 仅在“使用自定义品牌”时生效，留空会显示默认 Halo。
+          value: ""
+        - $formkit: attachment
+          name: brandLogo
+          id: brandLogo
+          key: brandLogo
+          label: 自定义品牌 Logo
+          help: 仅在“使用自定义品牌”时生效，可上传、从附件库选择，或输入链接。留空会显示默认 Halo 标识。
+          accepts:
+            - image/*
+          width: 240
+          value: ""
+        - $formkit: textarea
+          name: contactInfo
+          id: contactInfo
+          key: contactInfo
+          label: 站长联系方式说明
+          help: 支持填写文字联系方式，例如微信号、邮箱、说明文字。留空且未配置联系图片时，前台不会显示“联系站长”入口。
+          value: ""
+          rows: 4
+        - $formkit: attachment
+          name: contactImage
+          id: contactImage
+          key: contactImage
+          label: 站长联系图片
+          help: 可上传、从附件库选择，或输入链接。适合放二维码、名片图等。
+          accepts:
+            - image/*
+          width: 240
+          value: ""
         - $formkit: textarea
           name: registrationPagePatterns
           id: registrationPagePatterns
