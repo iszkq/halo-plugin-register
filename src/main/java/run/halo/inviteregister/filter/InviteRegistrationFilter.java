@@ -278,12 +278,12 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                 <style>
                     *{box-sizing:border-box;}
                     body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background-color:#f8fafc;background-image:radial-gradient(circle at 50%% -10%%,rgba(255,255,255,.98),transparent 36%%),radial-gradient(circle at 0%% 18%%,rgba(191,219,254,.5),transparent 28%%),radial-gradient(circle at 100%% 82%%,rgba(221,214,254,.36),transparent 32%%),linear-gradient(180deg,#f8fbff 0%%,#f3f7ff 54%%,#eef4ff 100%%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#0f172a;}
-                    .invite-shell{width:min(100%%,var(--invite-shell-width,460px));display:flex;flex-direction:column;align-items:center;--peek-shift:0px;--peek-rise:0px;--peek-tilt:0deg;}
+                    .invite-shell{width:min(100%%,460px);display:flex;flex-direction:column;align-items:center;--peek-pupil-x:0px;--peek-pupil-y:0px;--peek-rise:0px;--peek-tilt:0deg;}
                     .invite-brand{display:flex;align-items:center;justify-content:center;width:100%%;margin-bottom:30px;padding-inline:8px;}
-                    .invite-brand__logo{display:block;max-width:min(100%%,var(--invite-brand-logo-width,340px));max-height:var(--invite-brand-logo-height,120px);width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 12px 24px rgba(15,23,42,.08));}
-                    .invite-brand__fallback{display:flex;align-items:center;justify-content:center;width:var(--invite-brand-mark-size,72px);height:var(--invite-brand-mark-size,72px);border-radius:calc(var(--invite-brand-mark-size,72px) / 3);background:linear-gradient(180deg,#1e293b,#0f172a);color:#ffffff;font-size:calc(var(--invite-brand-mark-size,72px) * .44);font-weight:700;line-height:1;box-shadow:0 22px 36px rgba(15,23,42,.18);}
+                    .invite-brand__logo{display:block;width:var(--invite-brand-logo-width,auto);max-width:90%%;max-height:var(--invite-brand-logo-height,120px);height:auto;object-fit:contain;filter:drop-shadow(0 12px 24px rgba(15,23,42,.08));}
+                    .invite-brand__fallback{display:flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:24px;background:linear-gradient(180deg,#1e293b,#0f172a);color:#ffffff;font-size:32px;font-weight:700;line-height:1;box-shadow:0 22px 36px rgba(15,23,42,.18);}
                     .invite-brand--with-text{gap:16px;flex-wrap:nowrap;}
-                    .invite-brand__name{min-width:0;max-width:min(100%%,var(--invite-brand-name-width,300px));color:#0f172a;font-size:30px;font-weight:800;line-height:1.2;letter-spacing:.01em;word-break:break-word;overflow-wrap:anywhere;text-align:left;}
+                    .invite-brand__name{min-width:0;max-width:min(100%%,300px);color:#0f172a;font-size:30px;font-weight:800;line-height:1.2;letter-spacing:.01em;word-break:break-word;overflow-wrap:anywhere;text-align:left;}
                     .invite-card{position:relative;width:100%%;padding:40px 38px 36px;border:1px solid rgba(226,232,240,.88);border-radius:30px;background:rgba(255,255,255,.94);box-shadow:0 24px 48px rgba(15,23,42,.09),inset 0 1px 0 rgba(255,255,255,.8);backdrop-filter:blur(10px);overflow:hidden;}
                     .invite-card::before{content:"";position:absolute;top:-78px;right:-48px;width:180px;height:180px;border-radius:999px;background:radial-gradient(circle,rgba(96,165,250,.18) 0%%,rgba(96,165,250,0) 72%%);pointer-events:none;}
                     .invite-toast{margin-bottom:18px;padding:12px 14px;border-radius:16px;font-size:13px;font-weight:600;}
@@ -302,7 +302,8 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     .invite-mascot__strap{position:absolute;left:50%%;bottom:10px;width:28px;height:14px;transform:translateX(-50%%);border-radius:10px 10px 12px 12px;background:#5b7ae5;opacity:.95;}
                     .invite-mascot__eye-band{position:absolute;left:50%%;top:9px;width:26px;height:12px;transform:translateX(-50%%);border-radius:999px;background:#64748b;}
                     .invite-mascot__eye{position:absolute;top:6px;width:13px;height:13px;border-radius:999px;background:#ffffff;border:2px solid #475569;overflow:hidden;}
-                    .invite-mascot__eye::after{content:"";position:absolute;top:50%%;left:50%%;width:5px;height:5px;border-radius:999px;background:#0f172a;transform:translate(calc(-50%% + var(--peek-shift)),calc(-50%% + (var(--peek-rise) * -.04)));}
+                    .invite-mascot__eye::before{content:"";position:absolute;left:-2px;right:-2px;top:-2px;height:0;border-radius:999px;background:linear-gradient(180deg,#94a3b8 0%%,#64748b 100%%);z-index:2;animation:inviteMascotBlink 6.4s infinite;animation-delay:calc(var(--delay,0s) + .8s);}
+                    .invite-mascot__eye::after{content:"";position:absolute;top:50%%;left:50%%;width:4px;height:4px;border-radius:999px;background:#0f172a;box-shadow:0 0 0 1px rgba(15,23,42,.06);transform:translate(calc(-50%% + var(--peek-pupil-x)),calc(-50%% + var(--peek-pupil-y)));}
                     .invite-mascot__eye--left{left:6px;}
                     .invite-mascot__eye--right{right:6px;}
                     .invite-mascot__arm{position:absolute;bottom:10px;width:8px;height:18px;border-radius:999px;background:#ffd23f;border:2px solid #c58b00;}
@@ -315,8 +316,8 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     input::placeholder{color:#94a3b8;}
                     input:focus{background:#ffffff;border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.14),0 16px 28px rgba(148,163,184,.14);transform:translateY(-1px);}
                     .invite-input-icon{position:absolute;top:50%%;right:16px;display:flex;align-items:center;color:#94a3b8;transform:translateY(-50%%);pointer-events:none;}
-                    .invite-help{margin-top:6px;color:#64748b;font-size:13px;line-height:1.8;}
-                    .invite-submit{display:flex;align-items:center;justify-content:center;width:100%%;margin-top:4px;padding:16px 18px;border:0;border-radius:22px;background:linear-gradient(180deg,#1c2747 0%%,#0f172a 100%%);color:#ffffff;font-size:15px;font-weight:700;letter-spacing:.02em;cursor:pointer;box-shadow:0 18px 26px rgba(15,23,42,.14);transition:transform .18s ease,opacity .18s ease,box-shadow .18s ease,filter .18s ease;will-change:transform;}
+                    .invite-help{margin-top:8px;color:#64748b;font-size:13px;line-height:1.8;}
+                    .invite-submit{display:flex;align-items:center;justify-content:center;width:100%%;margin-top:12px;padding:16px 18px;border:0;border-radius:22px;background:linear-gradient(180deg,#1c2747 0%%,#0f172a 100%%);color:#ffffff;font-size:15px;font-weight:700;letter-spacing:.02em;cursor:pointer;box-shadow:0 18px 26px rgba(15,23,42,.14);transition:transform .18s ease,opacity .18s ease,box-shadow .18s ease,filter .18s ease;will-change:transform;}
                     .invite-submit:hover{transform:translateY(-1px);box-shadow:0 24px 34px rgba(15,23,42,.20);filter:brightness(1.03);}
                     .invite-submit:focus-visible{box-shadow:0 0 0 4px rgba(96,165,250,.18),0 22px 32px rgba(15,23,42,.18);}
                     .invite-submit:disabled{cursor:not-allowed;opacity:.74;}
@@ -324,7 +325,7 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     .invite-footer__actions{display:flex;flex-direction:column;align-items:center;gap:16px;}
                     .back-link{color:#94a3b8;font-size:13px;text-decoration:none;transition:color .18s ease;}
                     .back-link:hover{color:#475569;}
-                    .invite-contact-entry{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:14px;color:#64748b;font-size:13px;line-height:1.6;}
+                    .invite-contact-entry{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px;color:#64748b;font-size:13px;line-height:1.6;}
                     .invite-contact-entry__hint{font-weight:600;}
                     .invite-contact-link{display:inline-flex;align-items:center;gap:8px;max-width:100%%;padding:9px 14px;border:1px solid rgba(148,163,184,.28);border-radius:999px;background:rgba(255,255,255,.82);color:#334155;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 10px 18px rgba(15,23,42,.05);transition:transform .18s ease,border-color .18s ease,background-color .18s ease,box-shadow .18s ease,color .18s ease;}
                     .invite-contact-link:hover{transform:translateY(-1px);border-color:rgba(59,130,246,.26);background:#ffffff;color:#0f172a;box-shadow:0 12px 22px rgba(15,23,42,.08);}
@@ -341,14 +342,15 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     .invite-contact-dialog__image{display:block;width:100%%;max-height:260px;object-fit:contain;border-radius:16px;background:#f8fafc;}
                     .invite-contact-dialog__text{margin-top:16px;color:#334155;font-size:14px;line-height:1.8;text-align:left;word-break:break-word;}
                     @keyframes inviteMascotBob{0%%,100%%{margin-bottom:0;}50%%{margin-bottom:3px;}}
+                    @keyframes inviteMascotBlink{0%%,44%%,100%%{height:0;}45%%,47%%{height:100%%;}46%%{height:85%%;}}
                     @media (max-width:480px){
                         body{padding:28px 14px;}
                         .invite-shell{width:min(100%%,400px);}
                         .invite-card{padding:32px 20px 28px;border-radius:26px;}
                         .invite-brand{margin-bottom:20px;}
-                        .invite-brand__logo{max-height:min(var(--invite-brand-logo-height,88px),88px);}
+                        .invite-brand__logo{max-width:92%%;max-height:min(var(--invite-brand-logo-height,88px),88px);}
                         .invite-brand--with-text{gap:12px;}
-                        .invite-brand__fallback{width:min(var(--invite-brand-mark-size,64px),64px);height:min(var(--invite-brand-mark-size,64px),64px);border-radius:20px;font-size:28px;}
+                        .invite-brand__fallback{width:64px;height:64px;border-radius:20px;font-size:28px;}
                         .invite-brand__name{max-width:min(100%%,240px);font-size:24px;}
                         .invite-field__top{flex-direction:column;align-items:flex-start;gap:10px;}
                         .invite-peek{width:100%%;min-width:0;height:50px;}
@@ -417,10 +419,16 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                         const updatePeekState = () => {
                             const hasFocus = document.activeElement === inviteInput;
                             const valueLength = inviteInput.value.trim().length;
-                            const shift = Math.max(-2, Math.min(8, valueLength * 0.9 - 2));
-                            const rise = hasFocus || valueLength > 0 ? Math.min(11, 5 + valueLength * 0.45) : 0;
-                            const tilt = hasFocus || valueLength > 0 ? Math.max(-3, Math.min(6, valueLength * 0.5 - 1)) : 0;
-                            shell.style.setProperty("--peek-shift", shift.toFixed(2) + "px");
+                            const pupilX = hasFocus || valueLength > 0
+                                ? Math.max(-1.2, Math.min(1.8, valueLength * 0.22 - 0.2))
+                                : 0;
+                            const pupilY = hasFocus || valueLength > 0
+                                ? Math.max(-0.6, Math.min(0.4, 0.2 - valueLength * 0.03))
+                                : 0;
+                            const rise = hasFocus || valueLength > 0 ? Math.min(9, 4 + valueLength * 0.35) : 0;
+                            const tilt = hasFocus || valueLength > 0 ? Math.max(-2, Math.min(4, valueLength * 0.28 - 0.4)) : 0;
+                            shell.style.setProperty("--peek-pupil-x", pupilX.toFixed(2) + "px");
+                            shell.style.setProperty("--peek-pupil-y", pupilY.toFixed(2) + "px");
                             shell.style.setProperty("--peek-rise", rise.toFixed(2) + "px");
                             shell.style.setProperty("--peek-tilt", tilt.toFixed(2) + "deg");
                             shell.classList.toggle("is-peeking", hasFocus || valueLength > 0);
@@ -476,18 +484,14 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
     }
 
     private String buildShellInlineStyle(InviteRegistrationSettings settings) {
-        int brandLogoScale = "custom".equals(settings.getBrandSourceSafely())
-            ? settings.getBrandLogoScaleSafely()
-            : 100;
-        int logoMaxWidth = Math.round(340f * brandLogoScale / 100f);
-        int logoMaxHeight = Math.round(120f * brandLogoScale / 100f);
-        int brandMarkSize = Math.round(72f * brandLogoScale / 100f);
-        int shellWidth = Math.max(460, Math.min(760, logoMaxWidth + 96));
-        int brandNameWidth = Math.max(260, shellWidth - brandMarkSize - 112);
-        return (" style=\"--invite-shell-width:%dpx;--invite-brand-logo-width:%dpx;"
-            + "--invite-brand-logo-height:%dpx;--invite-brand-mark-size:%dpx;"
-            + "--invite-brand-name-width:%dpx;\"")
-            .formatted(shellWidth, logoMaxWidth, logoMaxHeight, brandMarkSize, brandNameWidth);
+        if (!"custom".equals(settings.getBrandSourceSafely())) {
+            return "";
+        }
+        int brandLogoScale = settings.getBrandLogoScaleSafely();
+        int logoWidth = Math.max(102, Math.min(414, Math.round(256f * brandLogoScale / 100f)));
+        int logoHeight = Math.max(32, Math.min(160, Math.round(120f * brandLogoScale / 100f)));
+        return (" style=\"--invite-brand-logo-width:%dpx;--invite-brand-logo-height:%dpx;\"")
+            .formatted(logoWidth, logoHeight);
     }
 
     private String buildBrandBlock(InviteRegistrationSettings settings,

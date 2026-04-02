@@ -80,11 +80,16 @@ spec:
           id: brandLogoScale
           key: brandLogoScale
           label: 自定义品牌 Logo 大小
-          help: 仅在使用自定义品牌 Logo 时建议调整，默认 100%，拖动后会同步放大或缩小前台顶部品牌图。
+          help: 仅调整自定义品牌 Logo 图片本身大小，不会改变邀请码卡片宽度。
           value: 100
           min: 40
           max: 180
           step: 5
+        - $el: div
+          if: "$get(brandSource).value === 'custom'"
+          attrs:
+            style: "margin-top:-8px;font-size:13px;font-weight:600;color:#64748b;"
+          children: "$get(brandLogoScale).value + '%'"
         - $formkit: textarea
           name: contactInfo
           id: contactInfo
