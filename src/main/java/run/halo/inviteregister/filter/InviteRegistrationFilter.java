@@ -294,8 +294,8 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     .invite-label{display:block;color:#0f172a;font-size:16px;font-weight:700;letter-spacing:.01em;}
                     .invite-peek{position:relative;display:flex;align-items:flex-end;justify-content:flex-end;min-width:184px;height:58px;flex:1;}
                     .invite-peek__track{position:absolute;left:0;right:0;bottom:14px;height:8px;border-radius:999px;background:linear-gradient(90deg,rgba(226,232,240,0),#e2e8f0 16%%,#dbeafe 60%%,rgba(191,219,254,.16) 100%%);}
-                    .invite-peek__crew{position:relative;z-index:1;display:flex;align-items:flex-end;gap:10px;padding-right:4px;}
-                    .invite-mascot{position:relative;width:42px;height:54px;transform:translate3d(0,calc(var(--peek-rise) * -1),0) rotate(var(--peek-tilt));transform-origin:center bottom;will-change:transform,filter;filter:drop-shadow(0 8px 12px rgba(250,204,21,.12));}
+                    .invite-peek__crew{position:relative;z-index:1;display:flex;align-items:flex-end;gap:10px;padding-right:4px;transition:transform .32s cubic-bezier(.2,.75,.35,1);}
+                    .invite-mascot{position:relative;width:42px;height:54px;transform:translate3d(0,calc(var(--peek-rise) * -1),0) rotate(var(--peek-tilt));transform-origin:center bottom;will-change:transform,filter;filter:drop-shadow(0 8px 12px rgba(250,204,21,.12));transition:transform .38s cubic-bezier(.2,.75,.35,1),filter .28s ease;}
                     .invite-mascot--2{width:44px;height:56px;}
                     .invite-mascot--3{width:40px;height:52px;}
                     .invite-mascot__shadow{position:absolute;left:50%%;bottom:0;width:28px;height:8px;border-radius:999px;background:rgba(148,163,184,.18);transform:translateX(-50%%);animation:inviteMascotShadow 3.6s ease-in-out infinite;animation-delay:var(--delay,0s);}
@@ -334,7 +334,43 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     .invite-mascot__tuft--1{transform:translateX(-5px) rotate(-18deg);}
                     .invite-mascot__tuft--2{transform:translateX(-1px) rotate(-2deg);}
                     .invite-mascot__tuft--3{transform:translateX(3px) rotate(16deg);}
+                    .invite-mascot__prop{position:absolute;opacity:0;pointer-events:none;will-change:transform,opacity;transition:opacity .26s ease,transform .34s cubic-bezier(.2,.75,.35,1);}
+                    .invite-mascot__magnifier{left:-8px;top:13px;width:20px;height:20px;transform:translate3d(-5px,7px,0) rotate(-18deg) scale(.82);}
+                    .invite-mascot__magnifier::before{content:"";position:absolute;inset:0;border-radius:999px;border:3px solid #7c8798;background:rgba(255,255,255,.68);backdrop-filter:blur(2px);box-shadow:inset 0 0 0 2px rgba(255,255,255,.28);}
+                    .invite-mascot__magnifier::after{content:"";position:absolute;right:-2px;bottom:-7px;width:4px;height:12px;border-radius:999px;background:#7c8798;transform:rotate(-38deg);transform-origin:top center;}
+                    .invite-mascot__tablet{left:50%%;bottom:11px;width:20px;height:16px;border-radius:6px;background:linear-gradient(180deg,#ffffff,#eef4ff);border:2px solid #8aa0f8;box-shadow:0 8px 14px rgba(96,165,250,.12);transform:translate3d(-50%%,9px,0) rotate(8deg) scale(.84);}
+                    .invite-mascot__tablet-line{position:absolute;left:4px;right:4px;height:2px;border-radius:999px;background:#93c5fd;}
+                    .invite-mascot__tablet-line--1{top:4px;}
+                    .invite-mascot__tablet-line--2{top:8px;right:7px;}
+                    .invite-mascot__tablet-line--3{top:12px;right:9px;}
+                    .invite-mascot__bubble{right:-9px;top:-4px;display:flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:linear-gradient(180deg,#ffffff,#eef6ff);border:2px solid rgba(96,165,250,.36);box-shadow:0 10px 16px rgba(96,165,250,.14);transform:translate3d(3px,8px,0) scale(.7);}
+                    .invite-mascot__bubble::after{content:"";position:absolute;left:5px;bottom:-5px;width:8px;height:8px;background:inherit;border-left:inherit;border-bottom:inherit;transform:rotate(-35deg);border-radius:0 0 0 4px;}
+                    .invite-mascot__bubble-icon{position:relative;z-index:1;color:#2563eb;font-size:11px;font-weight:900;line-height:1;}
+                    .invite-mascot--scout{z-index:1;}
+                    .invite-mascot--analyst{z-index:2;}
+                    .invite-mascot--captain{z-index:3;}
+                    .invite-mascot--captain .invite-mascot__mouth{width:14px;height:8px;}
+                    .invite-mascot--captain .invite-mascot__cheek{background:rgba(244,114,182,.2);}
+                    .invite-mascot--analyst .invite-mascot__mouth{opacity:.62;}
+                    .invite-mascot--scout .invite-mascot__mouth{width:10px;}
+                    .invite-shell[data-story="hunt"] .invite-mascot--scout{transform:translate3d(0,calc(var(--peek-rise) * -1 - 2px),0) rotate(calc(var(--peek-tilt) - 4deg));}
+                    .invite-shell[data-story="hunt"] .invite-mascot--scout .invite-mascot__magnifier{opacity:1;transform:translate3d(0,0,0) rotate(-12deg) scale(1);}
+                    .invite-shell[data-story="hunt"] .invite-mascot--analyst{transform:translate3d(0,calc(var(--peek-rise) * -1 + 1px),0) rotate(calc(var(--peek-tilt) - .8deg));}
+                    .invite-shell[data-story="hunt"] .invite-mascot--captain .invite-mascot__arm--right{animation:none;transform:rotate(-14deg);}
+                    .invite-shell[data-story="decode"] .invite-peek__crew{transform:translateY(-1px);}
+                    .invite-shell[data-story="decode"] .invite-mascot--scout{transform:translate3d(0,calc(var(--peek-rise) * -1 - 1px),0) rotate(calc(var(--peek-tilt) - 3deg));}
+                    .invite-shell[data-story="decode"] .invite-mascot--scout .invite-mascot__magnifier{opacity:.92;transform:translate3d(-1px,-1px,0) rotate(-18deg) scale(.98);}
+                    .invite-shell[data-story="decode"] .invite-mascot--analyst{transform:translate3d(0,calc(var(--peek-rise) * -1 - 3px),0) rotate(calc(var(--peek-tilt) - 1deg));}
+                    .invite-shell[data-story="decode"] .invite-mascot--analyst .invite-mascot__tablet{opacity:1;transform:translate3d(-50%%,0,0) rotate(4deg) scale(1);}
+                    .invite-shell[data-story="decode"] .invite-mascot--captain .invite-mascot__bubble{opacity:.82;transform:translate3d(1px,1px,0) scale(.88);}
+                    .invite-shell[data-story="ready"] .invite-peek__crew{transform:translateY(-2px);}
+                    .invite-shell[data-story="ready"] .invite-mascot--scout .invite-mascot__magnifier{opacity:.56;transform:translate3d(-2px,3px,0) rotate(-24deg) scale(.9);}
+                    .invite-shell[data-story="ready"] .invite-mascot--analyst .invite-mascot__tablet{opacity:1;transform:translate3d(-50%%,-1px,0) rotate(-2deg) scale(1);}
+                    .invite-shell[data-story="ready"] .invite-mascot--captain{transform:translate3d(0,calc(var(--peek-rise) * -1 - 4px),0) rotate(calc(var(--peek-tilt) + 2deg));}
+                    .invite-shell[data-story="ready"] .invite-mascot--captain .invite-mascot__bubble{opacity:1;transform:translate3d(0,-3px,0) scale(1);}
+                    .invite-shell[data-story="ready"] .invite-mascot--captain .invite-mascot__arm--right{animation:inviteMascotWave .88s ease-in-out infinite;}
                     .invite-shell.is-peeking .invite-peek__track{background:linear-gradient(90deg,rgba(226,232,240,0),#d7e5ff 14%%,#93c5fd 52%%,#60a5fa 100%%);}
+                    .invite-shell.is-peeking[data-story="ready"] .invite-peek__track{background:linear-gradient(90deg,rgba(226,232,240,0),#bfdbfe 10%%,#60a5fa 48%%,#38bdf8 100%%);}
                     .invite-shell.is-peeking .invite-mascot{filter:drop-shadow(0 12px 18px rgba(250,204,21,.18));}
                     .invite-input-wrap{position:relative;}
                     input{width:100%%;padding:16px 50px 16px 20px;border:1px solid #d9e4f4;border-radius:20px;background:linear-gradient(180deg,#ffffff,#f8fbff);color:#0f172a;font-size:15px;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.75);transition:border-color .18s ease,box-shadow .18s ease,background-color .18s ease,transform .18s ease;}
@@ -460,6 +496,13 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                         const updatePeekTarget = () => {
                             const hasFocus = document.activeElement === inviteInput;
                             const valueLength = inviteInput.value.trim().length;
+                            const storyStage = valueLength >= 8
+                                ? "ready"
+                                : valueLength >= 4
+                                    ? "decode"
+                                    : valueLength > 0
+                                        ? "hunt"
+                                        : "idle";
                             const basePupilX = hasFocus || valueLength > 0
                                 ? clamp(valueLength * 0.18 - 0.25, -0.8, 1.05)
                                 : 0;
@@ -474,11 +517,16 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                                 : clamp((pointerRatioY - 0.5) * 0.7, -0.22, 0.24);
                             targetPupilX = clamp(basePupilX + pointerPupilX, -1.18, 1.18);
                             targetPupilY = clamp(basePupilY + pointerPupilY, -0.34, 0.32);
-                            targetRise = hasFocus || valueLength > 0 ? Math.min(8.5, 4 + valueLength * 0.3) : 0;
+                            const storyRiseBoost = storyStage === "ready" ? 2.2 : storyStage === "decode" ? 1.2 : storyStage === "hunt" ? .5 : 0;
+                            const storyTiltBoost = storyStage === "ready" ? 1.1 : storyStage === "decode" ? .4 : 0;
+                            targetRise = hasFocus || valueLength > 0
+                                ? Math.min(9.8, 4 + valueLength * 0.3 + storyRiseBoost)
+                                : 0;
                             targetTilt = hasFocus || valueLength > 0
-                                ? clamp(valueLength * 0.24 - 0.35, -1.4, 3.2)
+                                ? clamp(valueLength * 0.24 - 0.35 + storyTiltBoost, -1.4, 3.6)
                                 : 0;
                             shell.classList.toggle("is-peeking", hasFocus || valueLength > 0);
+                            shell.dataset.story = storyStage;
                         };
 
                         const animatePeekState = () => {
@@ -605,13 +653,29 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                 </div>
             </div>
             """.formatted(
-            buildPeekMascot("invite-mascot", "0s"),
-            buildPeekMascot("invite-mascot invite-mascot--2", ".25s"),
-            buildPeekMascot("invite-mascot invite-mascot--3", ".5s")
+            buildPeekMascot("invite-mascot invite-mascot--scout", "0s", "scout"),
+            buildPeekMascot("invite-mascot invite-mascot--2 invite-mascot--analyst", ".25s", "analyst"),
+            buildPeekMascot("invite-mascot invite-mascot--3 invite-mascot--captain", ".5s", "captain")
         );
     }
 
-    private String buildPeekMascot(String className, String delay) {
+    private String buildPeekMascot(String className, String delay, String role) {
+        String accessory = switch (role) {
+            case "scout" -> "<span class=\"invite-mascot__prop invite-mascot__magnifier\"></span>";
+            case "analyst" -> """
+                <span class="invite-mascot__prop invite-mascot__tablet">
+                    <span class="invite-mascot__tablet-line invite-mascot__tablet-line--1"></span>
+                    <span class="invite-mascot__tablet-line invite-mascot__tablet-line--2"></span>
+                    <span class="invite-mascot__tablet-line invite-mascot__tablet-line--3"></span>
+                </span>
+                """;
+            case "captain" -> """
+                <span class="invite-mascot__prop invite-mascot__bubble">
+                    <span class="invite-mascot__bubble-icon">&#10003;</span>
+                </span>
+                """;
+            default -> "";
+        };
         return """
             <span class="%s" style="--delay:%s;">
                 <span class="invite-mascot__shadow"></span>
@@ -635,9 +699,10 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     <span class="invite-mascot__leg invite-mascot__leg--right"></span>
                     <span class="invite-mascot__shoe invite-mascot__shoe--left"></span>
                     <span class="invite-mascot__shoe invite-mascot__shoe--right"></span>
+                    %s
                 </span>
             </span>
-            """.formatted(className, delay);
+            """.formatted(className, delay, accessory);
     }
 
     private String buildContactTrigger(InviteRegistrationSettings settings) {
