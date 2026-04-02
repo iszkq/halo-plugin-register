@@ -292,25 +292,50 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     .invite-field{display:flex;flex-direction:column;gap:14px;}
                     .invite-field__top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:4px;}
                     .invite-label{display:block;color:#0f172a;font-size:16px;font-weight:700;letter-spacing:.01em;}
-                    .invite-peek{position:relative;display:flex;align-items:flex-end;justify-content:flex-end;min-width:184px;height:54px;flex:1;}
+                    .invite-peek{position:relative;display:flex;align-items:flex-end;justify-content:flex-end;min-width:184px;height:58px;flex:1;}
                     .invite-peek__track{position:absolute;left:0;right:0;bottom:14px;height:8px;border-radius:999px;background:linear-gradient(90deg,rgba(226,232,240,0),#e2e8f0 16%%,#dbeafe 60%%,rgba(191,219,254,.16) 100%%);}
-                    .invite-peek__crew{position:relative;z-index:1;display:flex;align-items:flex-end;gap:8px;padding-right:4px;}
-                    .invite-mascot{position:relative;width:36px;height:44px;animation:inviteMascotBob 2.8s ease-in-out infinite;animation-delay:var(--delay,0s);transform:translateY(calc(var(--peek-rise) * -1)) rotate(var(--peek-tilt));transform-origin:center bottom;transition:transform .22s ease,filter .22s ease;}
-                    .invite-mascot--2{width:38px;height:46px;}
-                    .invite-mascot--3{width:34px;height:42px;}
-                    .invite-mascot__body{position:absolute;left:50%%;bottom:0;width:32px;height:34px;transform:translateX(-50%%);border-radius:16px 16px 12px 12px;background:linear-gradient(180deg,#ffe066 0%%,#ffd23f 68%%,#ffbf1f 100%%);border:2px solid #c58b00;box-shadow:0 8px 14px rgba(250,204,21,.26);}
-                    .invite-mascot__strap{position:absolute;left:50%%;bottom:10px;width:28px;height:14px;transform:translateX(-50%%);border-radius:10px 10px 12px 12px;background:#5b7ae5;opacity:.95;}
-                    .invite-mascot__eye-band{position:absolute;left:50%%;top:9px;width:26px;height:12px;transform:translateX(-50%%);border-radius:999px;background:#64748b;}
-                    .invite-mascot__eye{position:absolute;top:6px;width:13px;height:13px;border-radius:999px;background:#ffffff;border:2px solid #475569;overflow:hidden;}
-                    .invite-mascot__eye::before{content:"";position:absolute;left:-2px;right:-2px;top:-2px;height:0;border-radius:999px;background:linear-gradient(180deg,#94a3b8 0%%,#64748b 100%%);z-index:2;animation:inviteMascotBlink 6.4s infinite;animation-delay:calc(var(--delay,0s) + .8s);}
+                    .invite-peek__crew{position:relative;z-index:1;display:flex;align-items:flex-end;gap:10px;padding-right:4px;}
+                    .invite-mascot{position:relative;width:42px;height:54px;transform:translate3d(0,calc(var(--peek-rise) * -1),0) rotate(var(--peek-tilt));transform-origin:center bottom;will-change:transform,filter;filter:drop-shadow(0 8px 12px rgba(250,204,21,.12));}
+                    .invite-mascot--2{width:44px;height:56px;}
+                    .invite-mascot--3{width:40px;height:52px;}
+                    .invite-mascot__shadow{position:absolute;left:50%%;bottom:0;width:28px;height:8px;border-radius:999px;background:rgba(148,163,184,.18);transform:translateX(-50%%);animation:inviteMascotShadow 3.6s ease-in-out infinite;animation-delay:var(--delay,0s);}
+                    .invite-mascot__inner{position:absolute;inset:0;animation:inviteMascotFloat 3.6s cubic-bezier(.45,.05,.35,1) infinite;animation-delay:var(--delay,0s);transform-origin:center bottom;will-change:transform;}
+                    .invite-mascot--2 .invite-mascot__inner{animation-duration:4.1s;}
+                    .invite-mascot--3 .invite-mascot__inner{animation-duration:3.2s;}
+                    .invite-mascot__body{position:absolute;left:50%%;bottom:7px;width:34px;height:39px;transform:translateX(-50%%);border-radius:18px 18px 14px 14px;background:linear-gradient(180deg,#ffe89a 0%%,#ffd84d 36%%,#ffc423 100%%);border:2px solid #c58b00;box-shadow:inset 0 2px 0 rgba(255,255,255,.38),0 10px 16px rgba(250,204,21,.20);}
+                    .invite-mascot__body::before{content:"";position:absolute;left:5px;right:5px;top:3px;height:12px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,0));}
+                    .invite-mascot__body::after{content:"";position:absolute;left:50%%;bottom:-2px;width:28px;height:19px;transform:translateX(-50%%);border-radius:12px 12px 11px 11px;background:linear-gradient(180deg,#6f8cff 0%%,#5577ef 100%%);border:2px solid #4c63d6;}
+                    .invite-mascot__strap{position:absolute;left:50%%;bottom:23px;width:28px;height:9px;transform:translateX(-50%%);border-radius:999px;background:#556fe2;box-shadow:0 0 0 2px rgba(91,122,229,.15);}
+                    .invite-mascot__pocket{position:absolute;left:50%%;bottom:14px;width:14px;height:10px;transform:translateX(-50%%);border-radius:5px 5px 7px 7px;background:#89a2ff;border:2px solid #4c63d6;}
+                    .invite-mascot__eye-band{position:absolute;left:50%%;top:9px;width:29px;height:13px;transform:translateX(-50%%);border-radius:999px;background:linear-gradient(180deg,#7c8798,#556070);}
+                    .invite-mascot__eye{position:absolute;top:5px;width:13px;height:13px;border-radius:999px;background:#ffffff;border:2px solid #475569;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.65);}
+                    .invite-mascot__eye::before{content:"";position:absolute;left:-2px;right:-2px;top:-2px;height:0;border-radius:999px;background:linear-gradient(180deg,#94a3b8 0%%,#64748b 100%%);z-index:2;animation:inviteMascotBlink 7.2s infinite;animation-delay:calc(var(--delay,0s) + .6s);}
                     .invite-mascot__eye::after{content:"";position:absolute;top:50%%;left:50%%;width:4px;height:4px;border-radius:999px;background:#0f172a;box-shadow:0 0 0 1px rgba(15,23,42,.06);transform:translate(calc(-50%% + var(--peek-pupil-x)),calc(-50%% + var(--peek-pupil-y)));}
-                    .invite-mascot__eye--left{left:6px;}
-                    .invite-mascot__eye--right{right:6px;}
-                    .invite-mascot__arm{position:absolute;bottom:10px;width:8px;height:18px;border-radius:999px;background:#ffd23f;border:2px solid #c58b00;}
-                    .invite-mascot__arm--left{left:2px;transform:rotate(14deg);}
-                    .invite-mascot__arm--right{right:2px;transform:rotate(-14deg);}
+                    .invite-mascot__eye--left{left:7px;}
+                    .invite-mascot__eye--right{right:7px;}
+                    .invite-mascot__shine{position:absolute;top:7px;left:50%%;width:18px;height:6px;transform:translateX(-50%%);border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0));opacity:.78;}
+                    .invite-mascot__mouth{position:absolute;left:50%%;top:24px;width:12px;height:6px;transform:translateX(-50%%);border-bottom:2px solid rgba(111,53,0,.68);border-radius:0 0 12px 12px;opacity:.72;}
+                    .invite-mascot--2 .invite-mascot__mouth{width:10px;height:4px;border-bottom-color:rgba(111,53,0,.58);}
+                    .invite-mascot--3 .invite-mascot__mouth{width:13px;height:7px;}
+                    .invite-mascot__cheek{position:absolute;top:23px;width:5px;height:5px;border-radius:999px;background:rgba(249,115,22,.18);}
+                    .invite-mascot__cheek--left{left:8px;}
+                    .invite-mascot__cheek--right{right:8px;}
+                    .invite-mascot__arm{position:absolute;bottom:17px;width:9px;height:20px;border-radius:999px;background:linear-gradient(180deg,#ffe27a,#ffc92f);border:2px solid #c58b00;transform-origin:center 3px;box-shadow:0 5px 8px rgba(197,139,0,.14);}
+                    .invite-mascot__arm--left{left:2px;transform:rotate(18deg);}
+                    .invite-mascot__arm--right{right:2px;transform:rotate(-18deg);}
+                    .invite-mascot--3 .invite-mascot__arm--right{animation:inviteMascotWave 1.9s ease-in-out infinite;animation-delay:calc(var(--delay,0s) + .35s);}
+                    .invite-mascot__leg{position:absolute;bottom:5px;width:6px;height:9px;border-radius:999px;background:#4c63d6;}
+                    .invite-mascot__leg--left{left:14px;}
+                    .invite-mascot__leg--right{right:14px;}
+                    .invite-mascot__shoe{position:absolute;bottom:1px;width:11px;height:5px;border-radius:999px;background:#334155;}
+                    .invite-mascot__shoe--left{left:11px;}
+                    .invite-mascot__shoe--right{right:11px;}
+                    .invite-mascot__tuft{position:absolute;left:50%%;top:3px;width:2px;height:7px;border-radius:999px;background:#475569;transform-origin:center bottom;}
+                    .invite-mascot__tuft--1{transform:translateX(-5px) rotate(-18deg);}
+                    .invite-mascot__tuft--2{transform:translateX(-1px) rotate(-2deg);}
+                    .invite-mascot__tuft--3{transform:translateX(3px) rotate(16deg);}
                     .invite-shell.is-peeking .invite-peek__track{background:linear-gradient(90deg,rgba(226,232,240,0),#d7e5ff 14%%,#93c5fd 52%%,#60a5fa 100%%);}
-                    .invite-shell.is-peeking .invite-mascot{filter:drop-shadow(0 12px 16px rgba(250,204,21,.18));}
+                    .invite-shell.is-peeking .invite-mascot{filter:drop-shadow(0 12px 18px rgba(250,204,21,.18));}
                     .invite-input-wrap{position:relative;}
                     input{width:100%%;padding:16px 50px 16px 20px;border:1px solid #d9e4f4;border-radius:20px;background:linear-gradient(180deg,#ffffff,#f8fbff);color:#0f172a;font-size:15px;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.75);transition:border-color .18s ease,box-shadow .18s ease,background-color .18s ease,transform .18s ease;}
                     input::placeholder{color:#94a3b8;}
@@ -341,8 +366,10 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     .invite-contact-dialog__title{margin:0 0 16px;color:#0f172a;font-size:20px;font-weight:700;text-align:left;}
                     .invite-contact-dialog__image{display:block;width:100%%;max-height:260px;object-fit:contain;border-radius:16px;background:#f8fafc;}
                     .invite-contact-dialog__text{margin-top:16px;color:#334155;font-size:14px;line-height:1.8;text-align:left;word-break:break-word;}
-                    @keyframes inviteMascotBob{0%%,100%%{margin-bottom:0;}50%%{margin-bottom:3px;}}
-                    @keyframes inviteMascotBlink{0%%,44%%,100%%{height:0;}45%%,47%%{height:100%%;}46%%{height:85%%;}}
+                    @keyframes inviteMascotFloat{0%%,100%%{transform:translate3d(0,0,0) rotate(-1deg);}50%%{transform:translate3d(0,-4px,0) rotate(1.5deg);}}
+                    @keyframes inviteMascotShadow{0%%,100%%{transform:translateX(-50%%) scaleX(1);opacity:.18;}50%%{transform:translateX(-50%%) scaleX(.9);opacity:.12;}}
+                    @keyframes inviteMascotWave{0%%,100%%{transform:rotate(-18deg);}35%%{transform:rotate(-42deg);}60%%{transform:rotate(-12deg);}}
+                    @keyframes inviteMascotBlink{0%%,42%%,100%%{height:0;}44%%,46%%{height:100%%;}45%%{height:78%%;}}
                     @media (max-width:480px){
                         body{padding:28px 14px;}
                         .invite-shell{width:min(100%%,400px);}
@@ -358,7 +385,7 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                         .invite-contact-entry{gap:8px;}
                         .invite-contact-link{padding:8px 12px;font-size:12px;}
                     }
-                    @media (prefers-reduced-motion:reduce){input,.invite-submit,.back-link,.invite-contact-link,.invite-contact-link__arrow,.invite-mascot{transition:none;animation:none;}}
+                    @media (prefers-reduced-motion:reduce){input,.invite-submit,.back-link,.invite-contact-link,.invite-contact-link__arrow,.invite-mascot,.invite-mascot__inner,.invite-mascot__shadow,.invite-mascot__eye::before,.invite-mascot__arm--right{transition:none;animation:none;}}
                 </style>
             </head>
             <body>
@@ -416,27 +443,72 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                         });
                     }
                     if (shell && inviteInput) {
-                        const updatePeekState = () => {
+                        let targetPupilX = 0;
+                        let targetPupilY = 0;
+                        let targetRise = 0;
+                        let targetTilt = 0;
+                        let currentPupilX = 0;
+                        let currentPupilY = 0;
+                        let currentRise = 0;
+                        let currentTilt = 0;
+                        let pointerRatioX = null;
+                        let pointerRatioY = null;
+
+                        const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+                        const mix = (from, to, amount) => from + (to - from) * amount;
+
+                        const updatePeekTarget = () => {
                             const hasFocus = document.activeElement === inviteInput;
                             const valueLength = inviteInput.value.trim().length;
-                            const pupilX = hasFocus || valueLength > 0
-                                ? Math.max(-1.2, Math.min(1.8, valueLength * 0.22 - 0.2))
+                            const basePupilX = hasFocus || valueLength > 0
+                                ? clamp(valueLength * 0.18 - 0.25, -0.8, 1.05)
                                 : 0;
-                            const pupilY = hasFocus || valueLength > 0
-                                ? Math.max(-0.6, Math.min(0.4, 0.2 - valueLength * 0.03))
+                            const basePupilY = hasFocus || valueLength > 0
+                                ? clamp(0.12 - valueLength * 0.025, -0.22, 0.18)
                                 : 0;
-                            const rise = hasFocus || valueLength > 0 ? Math.min(9, 4 + valueLength * 0.35) : 0;
-                            const tilt = hasFocus || valueLength > 0 ? Math.max(-2, Math.min(4, valueLength * 0.28 - 0.4)) : 0;
-                            shell.style.setProperty("--peek-pupil-x", pupilX.toFixed(2) + "px");
-                            shell.style.setProperty("--peek-pupil-y", pupilY.toFixed(2) + "px");
-                            shell.style.setProperty("--peek-rise", rise.toFixed(2) + "px");
-                            shell.style.setProperty("--peek-tilt", tilt.toFixed(2) + "deg");
+                            const pointerPupilX = pointerRatioX === null
+                                ? 0
+                                : clamp((pointerRatioX - 0.5) * 1.7, -0.72, 0.72);
+                            const pointerPupilY = pointerRatioY === null
+                                ? 0
+                                : clamp((pointerRatioY - 0.5) * 0.7, -0.22, 0.24);
+                            targetPupilX = clamp(basePupilX + pointerPupilX, -1.18, 1.18);
+                            targetPupilY = clamp(basePupilY + pointerPupilY, -0.34, 0.32);
+                            targetRise = hasFocus || valueLength > 0 ? Math.min(8.5, 4 + valueLength * 0.3) : 0;
+                            targetTilt = hasFocus || valueLength > 0
+                                ? clamp(valueLength * 0.24 - 0.35, -1.4, 3.2)
+                                : 0;
                             shell.classList.toggle("is-peeking", hasFocus || valueLength > 0);
                         };
+
+                        const animatePeekState = () => {
+                            currentPupilX = mix(currentPupilX, targetPupilX, 0.18);
+                            currentPupilY = mix(currentPupilY, targetPupilY, 0.18);
+                            currentRise = mix(currentRise, targetRise, 0.14);
+                            currentTilt = mix(currentTilt, targetTilt, 0.14);
+                            shell.style.setProperty("--peek-pupil-x", currentPupilX.toFixed(2) + "px");
+                            shell.style.setProperty("--peek-pupil-y", currentPupilY.toFixed(2) + "px");
+                            shell.style.setProperty("--peek-rise", currentRise.toFixed(2) + "px");
+                            shell.style.setProperty("--peek-tilt", currentTilt.toFixed(2) + "deg");
+                            window.requestAnimationFrame(animatePeekState);
+                        };
+
                         ["focus", "blur", "input", "change"].forEach((eventName) => {
-                            inviteInput.addEventListener(eventName, updatePeekState);
+                            inviteInput.addEventListener(eventName, updatePeekTarget);
                         });
-                        updatePeekState();
+                        inviteInput.addEventListener("pointermove", (event) => {
+                            const rect = inviteInput.getBoundingClientRect();
+                            pointerRatioX = clamp((event.clientX - rect.left) / rect.width, 0, 1);
+                            pointerRatioY = clamp((event.clientY - rect.top) / rect.height, 0, 1);
+                            updatePeekTarget();
+                        });
+                        inviteInput.addEventListener("pointerleave", () => {
+                            pointerRatioX = null;
+                            pointerRatioY = null;
+                            updatePeekTarget();
+                        });
+                        updatePeekTarget();
+                        animatePeekState();
                     }
                     const contactToggle = document.getElementById("contactAdminToggle");
                     const contactDialog = document.getElementById("contactAdminDialog");
@@ -542,13 +614,28 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
     private String buildPeekMascot(String className, String delay) {
         return """
             <span class="%s" style="--delay:%s;">
-                <span class="invite-mascot__arm invite-mascot__arm--left"></span>
-                <span class="invite-mascot__arm invite-mascot__arm--right"></span>
-                <span class="invite-mascot__body"></span>
-                <span class="invite-mascot__strap"></span>
-                <span class="invite-mascot__eye-band"></span>
-                <span class="invite-mascot__eye invite-mascot__eye--left"></span>
-                <span class="invite-mascot__eye invite-mascot__eye--right"></span>
+                <span class="invite-mascot__shadow"></span>
+                <span class="invite-mascot__inner">
+                    <span class="invite-mascot__tuft invite-mascot__tuft--1"></span>
+                    <span class="invite-mascot__tuft invite-mascot__tuft--2"></span>
+                    <span class="invite-mascot__tuft invite-mascot__tuft--3"></span>
+                    <span class="invite-mascot__arm invite-mascot__arm--left"></span>
+                    <span class="invite-mascot__arm invite-mascot__arm--right"></span>
+                    <span class="invite-mascot__body"></span>
+                    <span class="invite-mascot__strap"></span>
+                    <span class="invite-mascot__pocket"></span>
+                    <span class="invite-mascot__eye-band"></span>
+                    <span class="invite-mascot__shine"></span>
+                    <span class="invite-mascot__eye invite-mascot__eye--left"></span>
+                    <span class="invite-mascot__eye invite-mascot__eye--right"></span>
+                    <span class="invite-mascot__cheek invite-mascot__cheek--left"></span>
+                    <span class="invite-mascot__cheek invite-mascot__cheek--right"></span>
+                    <span class="invite-mascot__mouth"></span>
+                    <span class="invite-mascot__leg invite-mascot__leg--left"></span>
+                    <span class="invite-mascot__leg invite-mascot__leg--right"></span>
+                    <span class="invite-mascot__shoe invite-mascot__shoe--left"></span>
+                    <span class="invite-mascot__shoe invite-mascot__shoe--right"></span>
+                </span>
             </span>
             """.formatted(className, delay);
     }
