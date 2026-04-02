@@ -319,12 +319,25 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     .invite-submit:hover{background:#1e293b;}
                     .invite-submit:hover{transform:translateY(-1px);box-shadow:0 22px 30px rgba(15,23,42,.18);}
                     .invite-submit:disabled{cursor:not-allowed;opacity:.74;}
-                    .invite-footer{width:100%%;margin-top:24px;text-align:center;}
+                    .invite-footer{width:100%%;margin-top:18px;text-align:center;}
                     .invite-footer__actions{display:flex;flex-direction:column;align-items:center;gap:14px;}
                     .back-link{color:#94a3b8;font-size:13px;text-decoration:none;transition:color .18s ease;}
                     .back-link:hover{color:#475569;}
-                    .invite-contact-link{padding:0;border:0;background:none;color:#475569;font-size:14px;font-weight:700;cursor:pointer;transition:color .18s ease;}
-                    .invite-contact-link:hover{color:#0f172a;}
+                    .invite-contact-entry{margin-top:14px;}
+                    .invite-contact-link{position:relative;display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%%;padding:16px 18px;border:1px solid rgba(96,165,250,.2);border-radius:22px;background:linear-gradient(135deg,rgba(255,255,255,.98) 0%%,rgba(239,246,255,.98) 55%%,rgba(219,234,254,.95) 100%%);box-shadow:0 18px 30px rgba(37,99,235,.10),inset 0 1px 0 rgba(255,255,255,.9);cursor:pointer;overflow:hidden;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;}
+                    .invite-contact-link::before{content:"";position:absolute;left:-26px;top:-38px;width:136px;height:136px;border-radius:999px;background:radial-gradient(circle,rgba(250,204,21,.18) 0%%,rgba(250,204,21,0) 72%%);pointer-events:none;}
+                    .invite-contact-link:hover{transform:translateY(-1px);border-color:rgba(59,130,246,.38);box-shadow:0 22px 36px rgba(37,99,235,.16),inset 0 1px 0 rgba(255,255,255,.94);}
+                    .invite-contact-link__copy{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;}
+                    .invite-contact-link__eyebrow{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;background:rgba(37,99,235,.1);color:#2563eb;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;}
+                    .invite-contact-link__title{color:#0f172a;font-size:16px;font-weight:800;line-height:1.3;}
+                    .invite-contact-link__desc{color:#475569;font-size:13px;font-weight:600;line-height:1.6;}
+                    .invite-contact-link__visual{position:relative;z-index:1;display:flex;align-items:center;gap:10px;flex-shrink:0;padding-left:10px;}
+                    .invite-contact-link__glow{position:absolute;right:26px;top:50%%;width:72px;height:72px;transform:translateY(-50%%);border-radius:999px;background:radial-gradient(circle,rgba(96,165,250,.24) 0%%,rgba(96,165,250,0) 74%%);}
+                    .invite-contact-link__mascots{position:relative;display:flex;align-items:flex-end;gap:0;}
+                    .invite-contact-link__mascots .invite-mascot{width:30px;height:36px;transform:translateY(0) rotate(0deg) scale(.88);transform-origin:center bottom;filter:drop-shadow(0 8px 14px rgba(250,204,21,.20));animation:inviteContactFloat 3.3s ease-in-out infinite;animation-delay:var(--delay,0s);}
+                    .invite-contact-link__arrow{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;background:rgba(255,255,255,.86);color:#2563eb;box-shadow:0 10px 18px rgba(148,163,184,.16);transition:transform .18s ease,background-color .18s ease;}
+                    .invite-contact-link:hover .invite-contact-link__arrow{transform:translateX(2px);background:#ffffff;}
+                    .invite-contact-link:hover .invite-contact-link__mascots .invite-mascot{transform:translateY(-1px) scale(.9);}
                     .invite-contact-dialog[hidden]{display:none;}
                     .invite-contact-dialog{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:20px;}
                     .invite-contact-dialog__backdrop{position:absolute;inset:0;background:rgba(15,23,42,.42);}
@@ -334,8 +347,24 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                     .invite-contact-dialog__image{display:block;width:100%%;max-height:260px;object-fit:contain;border-radius:16px;background:#f8fafc;}
                     .invite-contact-dialog__text{margin-top:16px;color:#334155;font-size:14px;line-height:1.8;text-align:left;word-break:break-word;}
                     @keyframes inviteMascotBob{0%%,100%%{margin-bottom:0;}50%%{margin-bottom:3px;}}
-                    @media (max-width:480px){body{padding:24px 14px;}.invite-shell{width:min(100%%,400px);}.invite-card{padding:28px 20px 26px;border-radius:26px;}.invite-brand{margin-bottom:20px;}.invite-brand__logo{max-width:min(100%%,260px);max-height:88px;}.invite-brand--with-text{gap:12px;}.invite-brand__fallback{width:64px;height:64px;border-radius:20px;font-size:28px;}.invite-brand__name{max-width:min(100%%,240px);font-size:24px;}.invite-field__top{flex-direction:column;align-items:flex-start;gap:10px;}.invite-peek{width:100%%;min-width:0;height:50px;}.invite-peek__crew{margin-left:auto;}}
-                    @media (prefers-reduced-motion:reduce){input,.invite-submit,.back-link,.invite-mascot{transition:none;animation:none;}}
+                    @keyframes inviteContactFloat{0%%,100%%{transform:translateY(0) rotate(0deg) scale(.88);}50%%{transform:translateY(-3px) rotate(1deg) scale(.9);}}
+                    @media (max-width:480px){
+                        body{padding:24px 14px;}
+                        .invite-shell{width:min(100%%,400px);}
+                        .invite-card{padding:28px 20px 26px;border-radius:26px;}
+                        .invite-brand{margin-bottom:20px;}
+                        .invite-brand__logo{max-width:min(100%%,260px);max-height:88px;}
+                        .invite-brand--with-text{gap:12px;}
+                        .invite-brand__fallback{width:64px;height:64px;border-radius:20px;font-size:28px;}
+                        .invite-brand__name{max-width:min(100%%,240px);font-size:24px;}
+                        .invite-field__top{flex-direction:column;align-items:flex-start;gap:10px;}
+                        .invite-peek{width:100%%;min-width:0;height:50px;}
+                        .invite-peek__crew{margin-left:auto;}
+                        .invite-contact-link{flex-direction:column;align-items:stretch;padding:15px 16px;}
+                        .invite-contact-link__visual{width:100%%;justify-content:space-between;padding-left:0;}
+                        .invite-contact-link__desc{font-size:12px;}
+                    }
+                    @media (prefers-reduced-motion:reduce){input,.invite-submit,.back-link,.invite-contact-link,.invite-contact-link__arrow,.invite-mascot{transition:none;animation:none;}}
                 </style>
             </head>
             <body>
@@ -370,11 +399,11 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
                                 %s
                             </div>
                             <button id="inviteSubmit" class="invite-submit" type="submit">立即验证</button>
+                            %s
                         </form>
                     </section>
                     <div class="invite-footer">
                         <div class="invite-footer__actions">
-                            %s
                             <a class="back-link" href="/">不想使用邀请码？返回首页</a>
                         </div>
                     </div>
@@ -517,10 +546,31 @@ public class InviteRegistrationFilter implements AdditionalWebFilter {
             return "";
         }
         return """
-            <button id="contactAdminToggle" class="invite-contact-link" type="button" aria-expanded="false">
-                联系站长
-            </button>
-            """;
+            <div class="invite-contact-entry">
+                <button id="contactAdminToggle" class="invite-contact-link" type="button" aria-expanded="false">
+                    <span class="invite-contact-link__copy">
+                        <span class="invite-contact-link__eyebrow">快速联系</span>
+                        <span class="invite-contact-link__title">找不到邀请码？联系站长</span>
+                        <span class="invite-contact-link__desc">点这里查看微信、邮箱、二维码等联系方式</span>
+                    </span>
+                    <span class="invite-contact-link__visual" aria-hidden="true">
+                        <span class="invite-contact-link__glow"></span>
+                        <span class="invite-contact-link__mascots">
+                            %s
+                            %s
+                        </span>
+                        <span class="invite-contact-link__arrow">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/>
+                            </svg>
+                        </span>
+                    </span>
+                </button>
+            </div>
+            """.formatted(
+            buildPeekMascot("invite-mascot", "0s"),
+            buildPeekMascot("invite-mascot invite-mascot--3", ".2s")
+        );
     }
 
     private String buildContactBlock(InviteRegistrationSettings settings) {
