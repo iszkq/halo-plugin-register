@@ -121,6 +121,14 @@ function statusClass(item: InviteCode) {
   return item.spec.enabled ? "invite-badge--ok" : "invite-badge--mute";
 }
 
+function removeInviteCode(name: string) {
+  inviteCodes.value = inviteCodes.value.filter((item) => item.metadata.name !== name);
+}
+
+function isNotFoundError(error: any) {
+  return Number(error?.response?.status) === 404;
+}
+
 async function loadInviteCodes() {
   loading.value = true;
   errorMessage.value = "";
@@ -187,13 +195,19 @@ async function deleteInviteCode(item: InviteCode) {
   if (!confirmed) {
     return;
   }
+  const inviteName = item.metadata.name;
   errorMessage.value = "";
   successMessage.value = "";
   try {
-    await axiosInstance.delete(`${BASE_PATH}/${item.metadata.name}`);
+    await axiosInstance.delete(`${BASE_PATH}/${inviteName}`);
+    removeInviteCode(inviteName);
     successMessage.value = "邀请码已删除";
-    await loadInviteCodes();
   } catch (error: any) {
+    if (isNotFoundError(error)) {
+      removeInviteCode(inviteName);
+      successMessage.value = "邀请码已删除";
+      return;
+    }
     errorMessage.value = error?.response?.data?.message || "删除邀请码失败";
   }
 }
