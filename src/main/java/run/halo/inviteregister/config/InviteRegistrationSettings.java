@@ -41,6 +41,8 @@ public class InviteRegistrationSettings {
 
     private String brandLogo = "";
 
+    private Integer brandLogoScale = 100;
+
     private String contactInfo = "";
 
     private String contactImage = "";
@@ -96,6 +98,13 @@ public class InviteRegistrationSettings {
 
     public String getBrandLogoSafely() {
         return trimToNull(brandLogo);
+    }
+
+    public int getBrandLogoScaleSafely() {
+        if (brandLogoScale == null) {
+            return 100;
+        }
+        return Math.max(40, Math.min(180, brandLogoScale));
     }
 
     public String getContactInfoSafely() {

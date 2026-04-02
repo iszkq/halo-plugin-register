@@ -75,6 +75,16 @@ spec:
             - image/*
           width: 240
           value: ""
+        - $formkit: range
+          name: brandLogoScale
+          id: brandLogoScale
+          key: brandLogoScale
+          label: 自定义品牌 Logo 大小
+          help: 仅在使用自定义品牌 Logo 时建议调整，默认 100%，拖动后会同步放大或缩小前台顶部品牌图。
+          value: 100
+          min: 40
+          max: 180
+          step: 5
         - $formkit: textarea
           name: contactInfo
           id: contactInfo
